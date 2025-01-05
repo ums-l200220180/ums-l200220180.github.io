@@ -5,7 +5,7 @@ def load_yelp_reviews(num_docs):
     f = 'wa_guyup_rukun_sak_lawase_clean.tar'
     with tarfile.open(f) as tar:
             print('Read tar file ... ')
-            datafile = tar.extractfile('wa_guyup_rukun_sak_lawase_clean/wa_guyup_rukun_sak_lawase_clean.csv')
+            datafile = tar.extractfile('wa_guyup_rukun_sak_lawase_clean.csv')
             return list(islice(datafile, num_docs))
 
 def make_matrix(docs, binary=False):
