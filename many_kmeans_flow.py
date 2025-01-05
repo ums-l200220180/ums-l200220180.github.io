@@ -1,6 +1,6 @@
 from metaflow import FlowSpec, step, Parameter, resources, conda_base, profile
 
-@conda_base(python='3.8.3', libraries={'scikit-learn': '0.24.1'})
+# @conda_base(python='3.8.3', libraries={'scikit-learn': '0.24.1'}) # Tidak Dipakai
 class ManyKmeansFlow(FlowSpec):
 
     num_docs = Parameter('num-docs', help='Number of documents', default=1000000)
@@ -11,10 +11,10 @@ class ManyKmeansFlow(FlowSpec):
         import scale_data
         docs = scale_data.load_yelp_reviews(self.num_docs)
         self.mtx, self.cols = scale_data.make_matrix(docs)
-        self.k_params = list(range(5, 55, 5))
+        self.k_params = list(range(3, 6, 1))       # list(range(3,6,1)) -> untuk membuat data menjadi 3, 4 dan 5 clusters
         self.next(self.train_kmeans, foreach='k_params')
 
-    @resources(cpu=4, memory=4000)
+    # @resources(cpu=4, memory=4000) # Tidak Dipakai
     @step
     def train_kmeans(self):
         from sklearn.cluster import KMeans

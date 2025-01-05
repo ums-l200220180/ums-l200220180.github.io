@@ -1,12 +1,11 @@
 import tarfile
 from itertools import islice
-from metaflow import S3
 
 def load_yelp_reviews(num_docs):
-    with S3() as s3:
-        res = s3.get('s3://fast-ai-nlp/yelp_review_full_csv.tgz')
-        with tarfile.open(res.path) as tar:
-            datafile = tar.extractfile('yelp_review_full_csv/train.csv')
+    f = 'wa_guyup_rukun_sak_lawase_clean.tar'
+    with tarfile.open(f) as tar:
+            print('Read tar file ... ')
+            datafile = tar.extractfile('wa_guyup_rukun_sak_lawase_clean/wa_guyup_rukun_sak_lawase_clean.csv')
             return list(islice(datafile, num_docs))
 
 def make_matrix(docs, binary=False):
